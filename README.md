@@ -1,6 +1,6 @@
 # Pixie.ETS
 
-**TODO: Add description**
+ETS (in memory) storage backend for [Pixie](https://github.com/messagerocket/pixie).
 
 ## Installation
 
