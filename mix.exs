@@ -2,12 +2,34 @@ defmodule Pixie.ETS.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :pixie_ets,
-     version: "0.0.1",
-     elixir: "~> 1.2",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps]
+    [
+      app:             :pixie_ets,
+      version:         "0.0.1",
+      elixir:          "~> 1.2",
+      build_embedded:  Mix.env == :prod,
+      start_permanent: Mix.env == :prod,
+      deps:            deps,
+      package:         package,
+      description:     description,
+      source_url:      "https://github.com/messagerocket/pixie_ets"
+    ]
+  end
+
+  defp package do
+    [
+      maintainers: ["James Harton"],
+      licenses: ["MIT"],
+      links: %{
+        "messagerocket" => "https://messagerocket.co",
+        "github"        => "https://github.com/messagerocket/pixie_ets"
+      }
+    ]
+  end
+
+  defp description do
+    """
+    ETS storage backend for Pixie.
+    """
   end
 
   # Configuration for the OTP application

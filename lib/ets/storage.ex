@@ -48,11 +48,21 @@ defmodule Pixie.ETS.Storage do
     |> :ets.match(spec)
   end
 
+  def reset! do
+    GenServer.call(__MODULE__, :reset!)
+  end
+
   def handle_call({:set, key, value}, _, table) do
     {:reply, :ets.insert(__MODULE__, {key, value}), table}
   end
 
   def handle_call({:delete, key}, _, table) do
     {:reply, :ets.delete(__MODULE__, key), table}
+  end
+
+  def handle_call(:reset!, _, table) do
+    table
+    |> :ets.delete_all_objects
+    {:reply, :ok, table}
   end
 end

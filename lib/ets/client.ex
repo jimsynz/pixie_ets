@@ -13,6 +13,14 @@ defmodule Pixie.ETS.Client do
     Storage.get({:client, client_id})
   end
 
+  def destroy(client_id) do
+    Storage.delete({:client, client_id})
+  end
+
+  def exists?(client_id) do
+    Storage.exists?({:client, client_id})
+  end
+
   def list do
     Storage.all(:client)
   end

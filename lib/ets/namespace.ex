@@ -18,7 +18,9 @@ defmodule Pixie.ETS.Namespace do
   end
 
   def all do
-    Storage.all(:namespace)
+    :namespace
+    |> Storage.all
+    |> Enum.map(&elem(&1, 0))
   end
 
   def exists?(namespace) do

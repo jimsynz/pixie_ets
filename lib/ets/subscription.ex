@@ -9,8 +9,8 @@ defmodule Pixie.ETS.Subscription do
     Storage.set({:subscription, {client_id, channel_name}})
   end
 
-  def describe(client_id, channel_name) do
-    Storage.destroy({:subscription, {client_id, channel_name}})
+  def destroy(client_id, channel_name) do
+    Storage.delete({:subscription, {client_id, channel_name}})
   end
 
   def list do
