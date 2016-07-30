@@ -4,7 +4,7 @@ defmodule Pixie.ETS.Mixfile do
   def project do
     [
       app:             :pixie_ets,
-      version:         "0.0.1",
+      version:         "1.0.0",
       elixir:          "~> 1.2",
       build_embedded:  Mix.env == :prod,
       start_permanent: Mix.env == :prod,
@@ -28,7 +28,7 @@ defmodule Pixie.ETS.Mixfile do
 
   defp description do
     """
-    ETS storage backend for Pixie.
+    ETS storage backend for Pixie, Elixir's Bayeux server.
     """
   end
 
@@ -52,7 +52,6 @@ defmodule Pixie.ETS.Mixfile do
   defp deps do
     [
       {:u_token,      "~> 0.0.1"},
-      {:pixie,        "~> 0.3.5"},
       {:ex_minimatch, "~> 0.0.1"},
       {:dogma,        "~> 0.1.7", only: :dev}
     ]

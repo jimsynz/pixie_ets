@@ -7,13 +7,13 @@ defmodule Pixie.ETS.ClientTest do
   end
 
   test "`store`" do
-    Client.store("client_id", :client)
+    Client.store("client_id", self)
     assert Storage.exists?({:client, "client_id"})
   end
 
   test "`get` when the client exists" do
-    Client.store("client_id", :client)
-    assert Client.get("client_id") == :client
+    Client.store("client_id", self)
+    assert Client.get("client_id") == self
   end
 
   test "`get` when the client doesn't exist" do
@@ -21,14 +21,14 @@ defmodule Pixie.ETS.ClientTest do
   end
 
   test "`destroy`" do
-    Client.store("client_id", :client)
+    Client.store("client_id", self)
     assert Storage.exists?({:client, "client_id"})
     Client.destroy("client_id")
     refute Storage.exists?({:client, "client_id"})
   end
 
   test "`exists?` when the client exists" do
-    Client.store("client_id", :client)
+    Client.store("client_id", self)
     assert Client.exists?("client_id")
   end
 

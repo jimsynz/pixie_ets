@@ -27,7 +27,7 @@ defmodule Pixie.ETS.Subscription do
     |> Enum.reduce(MapSet.new, fn (channel_name, clients) ->
       new_clients =
         channel_name
-        |> clients_for_channel_name
+        |> client_ids_for_channel_name
         |> MapSet.new
 
       MapSet.union(clients, new_clients)
@@ -43,13 +43,15 @@ defmodule Pixie.ETS.Subscription do
   end
 
   defp client_ids_for_channel_name(channel_name) do
-    Storage.match({{:subscription, {:"$1", channel_name}}, :_})
+    {{:subscription, {:"$1", channel_name}}, :_}
+    |> Storage.match
+    |> Enum.map(fn([id]) -> id end)
   end
 
   defp clients_for_channel_name(channel_name) do
     channel_name
     |> client_ids_for_channel_name
-    |> Enum.map(fn ([client_id]) ->
+    |> Enum.map(fn (client_id) ->
        Client.get(client_id)
     end)
   end

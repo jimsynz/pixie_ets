@@ -34,8 +34,17 @@ defmodule Pixie.ETS.SubscriptionTest do
 
   test "`clients_on`" do
     make_some_subs
-    clients = MapSet.new([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-    assert Subscription.clients_on("/channel/3") == clients
+
+    actual =
+      Subscription.clients_on("/channel/3")
+      |> Enum.into(MapSet.new)
+
+    expected =
+      1..10
+      |> Enum.map(fn(i) -> "client_#{i}" end)
+      |> Enum.into(MapSet.new)
+
+    assert actual == expected
   end
 
   test "`channels_on`" do
@@ -64,7 +73,8 @@ defmodule Pixie.ETS.SubscriptionTest do
       |> Enum.each(fn (j) ->
         channel = "/channel/#{j}"
         Channel.store(channel)
-        Client.store(client_id, i)
+        {:ok, pid} = Agent.start_link(fn -> i end)
+        Client.store(client_id, pid)
         Subscription.create(client_id, channel)
       end)
     end)
