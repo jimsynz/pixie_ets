@@ -53,7 +53,8 @@ defmodule Pixie.ETS.Mixfile do
     [
       {:u_token,      "~> 0.0.1"},
       {:ex_minimatch, "~> 0.0.1"},
-      {:dogma,        "~> 0.1.7", only: :dev}
+      {:dogma,        "~> 0.1.7", only: :dev},
+      {:ex_doc,       ">= 0.0.0", only: :dev}
     ]
   end
 end
